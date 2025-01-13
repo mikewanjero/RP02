@@ -1,26 +1,18 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import classes from "./NewPost.module.css";
 
-function NewPost() {
-  const [enteredBody, setEnteredBody] = useState(""); // This is a dummy state to show how to use multiple states in a component
-
-  function changeBodyHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-
+function NewPost(props) {
   return (
     <form className={classes.form}>
       <p>
         <label htmlFor="body">Text</label>
-        <textarea id="body" required rows={3} onChange={changeBodyHandler} />
+        <textarea id="body" required rows={3} onChange={props.onStateChange} />
       </p>
-      <p>{enteredBody}</p>
       <p>
         <label htmlFor="name">Your name</label>
-        <input type="text" id="name" required />
+        <input type="text" id="name" required onChange={props.onAuthorChange} />
       </p>
     </form>
   );
 }
-
 export default NewPost;
