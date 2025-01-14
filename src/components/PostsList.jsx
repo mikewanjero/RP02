@@ -24,6 +24,7 @@ export default function PostsList({ isPosting, onStopPost }) {
           <NewPost
             onStateChange={handleStateChange}
             onAuthorChange={handleAuthorChange}
+            onCancel={onStopPost}
           />
         </Modal>
       ) : null}
