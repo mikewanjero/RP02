@@ -36,9 +36,7 @@ function NewPost({ onAddPost, onCancel }) {
         <input type="text" id="name" required onChange={handleAuthorChange} />
       </p>
       <p className={classes.actions}>
-        <button type="submit" onClick={onAddPost}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
         <button type="button" onClick={onCancel}>
           Cancel
         </button>
