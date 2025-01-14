@@ -1,17 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import styles from "./PostsList.module.css";
 import Modal from "./Modal";
 
-export default function PostsList() {
+export default function PostsList({ isPosting, onStopPost }) {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [modalIsVisible, setModalIsVisible] = useState(true);
-
-  function hideModal() {
-    setModalIsVisible(false);
-  }
 
   function handleStateChange(event) {
     setEnteredBody(event.target.value);
@@ -23,8 +19,8 @@ export default function PostsList() {
 
   return (
     <>
-      {modalIsVisible ? (
-        <Modal onClose={hideModal}>
+      {isPosting ? (
+        <Modal onClose={onStopPost}>
           <NewPost
             onStateChange={handleStateChange}
             onAuthorChange={handleAuthorChange}
