@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import NewPost from "./NewPost";
-// import Post from "./Post";
+import Post from "./Post";
 import styles from "./PostsList.module.css";
 import Modal from "./Modal";
 import { useState } from "react";
@@ -19,10 +19,16 @@ export default function PostsList({ isPosting, onStopPost }) {
           <NewPost onAddPost={addPost} onCancel={onStopPost} />
         </Modal>
       ) : null}
-      <ul className={styles.posts}>
-        {posts}
-        {/* <Post author="John" body="Check out the full course" /> */}
-      </ul>
+      {posts.length > 0 ? (
+        <ul className={styles.posts}>
+          {posts.map((post, index) => (
+            <Post key={index} author={post.author} body={post.body} />
+          ))}
+        </ul>
+      ) : null}
+      {posts.length === 0 ? (
+        <p style={{ textAlign: "center" }}>No posts yet!</p>
+      ) : null}
     </>
   );
 }
