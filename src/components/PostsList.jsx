@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import NewPost from "./NewPost";
-import Post from "./Post";
+// import Post from "./Post";
 import styles from "./PostsList.module.css";
 import Modal from "./Modal";
 import { useState } from "react";
@@ -20,7 +20,8 @@ export default function PostsList({ isPosting, onStopPost }) {
         </Modal>
       ) : null}
       <ul className={styles.posts}>
-        <Post author="John" body="Check out the full course" />
+        {posts}
+        {/* <Post author="John" body="Check out the full course" /> */}
       </ul>
     </>
   );
