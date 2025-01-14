@@ -2,7 +2,7 @@
 import { useState } from "react";
 import classes from "./NewPost.module.css";
 
-function NewPost({ onCancel }) {
+function NewPost({ onAddPost, onCancel }) {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
 
@@ -20,6 +20,7 @@ function NewPost({ onCancel }) {
       body: enteredBody,
       author: enteredAuthor,
     };
+    onAddPost(postData);
     console.log(postData);
     onCancel();
   }
@@ -35,7 +36,9 @@ function NewPost({ onCancel }) {
         <input type="text" id="name" required onChange={handleAuthorChange} />
       </p>
       <p className={classes.actions}>
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={onAddPost}>
+          Submit
+        </button>
         <button type="button" onClick={onCancel}>
           Cancel
         </button>
