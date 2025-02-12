@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import NewPost from "./NewPost";
-import Post from "./Post";
+import NewPost from "../NewPost/NewPost";
+import Post from "../Post/Post";
 import styles from "./PostsList.module.css";
-import Modal from "./Modal";
+import Modal from "../Modal/Modal";
 import { useState } from "react";
 
 export default function PostsList({ isPosting, onStopPost }) {
