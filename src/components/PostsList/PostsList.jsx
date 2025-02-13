@@ -1,12 +1,23 @@
 /* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import NewPost from "../NewPost/NewPost";
 import Post from "../Post/Post";
 import styles from "./PostsList.module.css";
 import Modal from "../Modal/Modal";
-import { useState } from "react";
 
 export default function PostsList({ isPosting, onStopPost }) {
   const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Function to fetch posts from the server - (In dummy-backend folder)
+    async function fetchPosts() {
+      const response = await fetch("http://localhost:8080/posts");
+      const respData = await response.json();
+      setPosts(respData.posts);
+    }
+
+    fetchPosts();
+  }, []);
 
   function addPost(postData) {
     fetch("http://localhost:8080/posts", {
@@ -39,3 +50,15 @@ export default function PostsList({ isPosting, onStopPost }) {
     </>
   );
 }
+
+// Infinite loop
+// fetch("http://localhost:8080/posts",{
+//   method: "GET",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// }).then(response => {
+//   response.json()
+// }).then((data) => {
+//   setPosts(data.posts);
+// });
