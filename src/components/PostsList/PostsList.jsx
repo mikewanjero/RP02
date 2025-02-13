@@ -7,13 +7,16 @@ import Modal from "../Modal/Modal";
 
 export default function PostsList({ isPosting, onStopPost }) {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Function to fetch posts from the server - (In dummy-backend folder)
     async function fetchPosts() {
+      setIsLoading(true);
       const response = await fetch("http://localhost:8080/posts");
       const respData = await response.json();
       setPosts(respData.posts);
+      setIsLoading(false);
     }
 
     fetchPosts();
@@ -32,19 +35,24 @@ export default function PostsList({ isPosting, onStopPost }) {
 
   return (
     <>
+      {/* Show modal to add new post */}
       {isPosting ? (
         <Modal onClose={onStopPost}>
           <NewPost onAddPost={addPost} onCancel={onStopPost} />
         </Modal>
       ) : null}
-      {posts.length > 0 ? (
+      {/* Show loading spinner */}
+      {isLoading ? <p style={{ textAlign: "center" }}>Loading...</p> : null}
+      {/* Display posts */}
+      {!isLoading && posts.length > 0 ? (
         <ul className={styles.posts}>
           {posts.map((post, index) => (
             <Post key={index} author={post.author} body={post.body} />
           ))}
         </ul>
       ) : null}
-      {posts.length === 0 ? (
+      {/* Display message if no posts */}
+      {!isLoading && posts.length === 0 ? (
         <p style={{ textAlign: "center" }}>No posts yet!</p>
       ) : null}
     </>
